@@ -3,44 +3,57 @@ import ReactDOM from 'react-dom';
 import './index.css';
 
 class Square extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            value: null,
+            parent: null
+        }
+    }
     render() {
+        console.log(this.props)
       return (
         <button className="square">
-          {/* TODO */}
+          {this.props.x},{this.props.y}
         </button>
       );
     }
   }
   
-  class Grid extends React.Component {
-    renderSquare(i) {
-        return <Square />;
+class Grid extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+        }
+    }
+    renderSquare(x, y) {
+        return <Square x={x} y={y}/>;
     }
       
     render() {
         return (<div className="grid">
           <div className="grid-row">
-            {this.renderSquare(0)}
-            {this.renderSquare(1)}
-            {this.renderSquare(2)}
+            {this.renderSquare(0, 0)}
+            {this.renderSquare(0, 1)}
+            {this.renderSquare(0, 2)}
           </div>
           <div className="grid-row">
-            {this.renderSquare(3)}
-            {this.renderSquare(4)}
-            {this.renderSquare(5)}
+            {this.renderSquare(1, 0)}
+            {this.renderSquare(1, 1)}
+            {this.renderSquare(1, 2)}
           </div>
           <div className="grid-row">
-            {this.renderSquare(6)}
-            {this.renderSquare(7)}
-            {this.renderSquare(8)}
+            {this.renderSquare(2, 0)}
+            {this.renderSquare(2, 1)}
+            {this.renderSquare(2, 2)}
           </div>
         </div>
         );
     }
   }
   class Board extends React.Component {
-    renderGrid(i) {
-        return <Grid />;
+    renderGrid(x, y) {
+        return (<Grid x={x} y={y}/>);
       }
   
     render() {
@@ -50,19 +63,19 @@ class Square extends React.Component {
         <div>
           <div className="status">{status}</div>
           <div className="board-row">
-            {this.renderGrid(0)}
-            {this.renderGrid(1)}
-            {this.renderGrid(2)}
+            {this.renderGrid(0, 0)}
+            {this.renderGrid(0, 1)}
+            {this.renderGrid(0, 2)}
           </div>
           <div className="board-row">
-            {this.renderGrid(3)}
-            {this.renderGrid(4)}
-            {this.renderGrid(5)}
+            {this.renderGrid(1, 0)}
+            {this.renderGrid(1, 1)}
+            {this.renderGrid(1, 2)}
           </div>
           <div className="board-row">
-            {this.renderGrid(6)}
-            {this.renderGrid(7)}
-            {this.renderGrid(8)}
+            {this.renderGrid(2, 0)}
+            {this.renderGrid(2, 1)}
+            {this.renderGrid(2, 2)}
           </div>
         </div>
       );
