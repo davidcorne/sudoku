@@ -7,6 +7,14 @@ body {
     padding-left: 30px;
   }
   
+  .grid-row {
+    float: left;
+  }
+
+  .grid-row:after {
+      clear: both;
+  }
+  
   .board-row:after {
     clear: both;
     content: "";

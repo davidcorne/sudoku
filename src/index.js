@@ -12,10 +12,36 @@ class Square extends React.Component {
     }
   }
   
-  class Board extends React.Component {
+  class Grid extends React.Component {
     renderSquare(i) {
-      return <Square />;
+        return <Square />;
     }
+      
+    render() {
+        return (<div className="grid">
+          <div className="grid-row">
+            {this.renderSquare(0)}
+            {this.renderSquare(1)}
+            {this.renderSquare(2)}
+          </div>
+          <div className="grid-row">
+            {this.renderSquare(3)}
+            {this.renderSquare(4)}
+            {this.renderSquare(5)}
+          </div>
+          <div className="grid-row">
+            {this.renderSquare(6)}
+            {this.renderSquare(7)}
+            {this.renderSquare(8)}
+          </div>
+        </div>
+        );
+    }
+  }
+  class Board extends React.Component {
+    renderGrid(i) {
+        return <Grid />;
+      }
   
     render() {
       const status = 'Next player: X';
@@ -24,19 +50,19 @@ class Square extends React.Component {
         <div>
           <div className="status">{status}</div>
           <div className="board-row">
-            {this.renderSquare(0)}
-            {this.renderSquare(1)}
-            {this.renderSquare(2)}
+            {this.renderGrid(0)}
+            {this.renderGrid(1)}
+            {this.renderGrid(2)}
           </div>
           <div className="board-row">
-            {this.renderSquare(3)}
-            {this.renderSquare(4)}
-            {this.renderSquare(5)}
+            {this.renderGrid(3)}
+            {this.renderGrid(4)}
+            {this.renderGrid(5)}
           </div>
           <div className="board-row">
-            {this.renderSquare(6)}
-            {this.renderSquare(7)}
-            {this.renderSquare(8)}
+            {this.renderGrid(6)}
+            {this.renderGrid(7)}
+            {this.renderGrid(8)}
           </div>
         </div>
       );
