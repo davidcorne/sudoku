@@ -8,6 +8,7 @@ class gameSquare {
         this.board = board;
         this.displayValue = null;
         this.trueValue = null;
+        this.starting = null;
         this.guesses = [];
         this.x = x;
         this.y = y;
@@ -17,6 +18,7 @@ class gameSquare {
         this.displayValue = other.displayValue;
         this.trueValue = other.trueValue;
         this.guesses = other.guesses.slice();
+        this.starting = other.starting;
     }
 }
 
@@ -42,8 +44,10 @@ class gameBoard {
         if (displayValues.length !== 81) throw Error('Wrong displayValues array length');
         for (let i = 0; i < 9; i++) {
             for (let j = 0; j < 9; j++) {
-                this.square(i, j).trueValue = trueValues[j * 9 + i];
-                this.square(i, j).displayValue = displayValues[j * 9 + i];
+                const square = this.square(i, j);
+                square.trueValue = trueValues[j * 9 + i];
+                square.displayValue = displayValues[j * 9 + i];
+                square.starting = Boolean(square.displayValue);
             }
         }
 
@@ -109,18 +113,21 @@ class gameBoard {
 function Square(props) {
     let classNames = "square";
     if (props.selected) {
-        classNames += " selected"
+        classNames += " selected";
     }
     if (props.square.displayValue && props.square.trueValue !== props.square.displayValue) {
-        classNames += " incorrect"
+        classNames += " incorrect";
+    }
+    if (props.square.starting) {
+        classNames += " starting";
     }
     return (
-    <button
-        className={classNames}
-        onClick={() => props.onClick()}
-    >
-        {props.square.displayValue}
-    </button>
+        <button
+            className={classNames}
+            onClick={() => props.onClick()}
+        >
+            {props.square.displayValue}
+        </button>
     );
 }
   

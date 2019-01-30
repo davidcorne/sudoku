@@ -56,6 +56,10 @@ body {
     color: red;
   }
 
+  .starting {
+    color: blue;
+  }
+
   .kbd-navigation .square:focus {
     background: #ddd;
   }
