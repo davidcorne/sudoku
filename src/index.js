@@ -216,7 +216,8 @@ class Game extends React.Component {
         this.numberGuessedCallback = null;
         this.state = {
             history: [new gameBoard()],
-            selection: {x:0, y:0}
+            selection: {x:0, y:0},
+            pencil: false
         }
         this.state.history[0].generate();
     }
@@ -231,23 +232,20 @@ class Game extends React.Component {
         const selection = this.state.selection;
         board.square(selection.x, selection.y).displayValue = i;
         this.setState({
-            history: history.concat([board]),
-            selection: selection
+            history: history.concat([board])
         });
     }
 
     handleClick(x, y) {
         this.setState({
-            history: this.state.history,
-            selection: {x: x, y: y}
+            selection: {x: x, y: y},
         })
     }
 
     undoClicked() {
         if (this.state.history.length > 1) {
             this.setState({
-                history: this.state.history.slice(0, this.state.history.length - 1),
-                selection: this.state.selection
+                history: this.state.history.slice(0, this.state.history.length - 1)
             })
         }
     }
