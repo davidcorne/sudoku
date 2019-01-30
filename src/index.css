@@ -52,6 +52,10 @@ body {
     background: #c1d9ff;
   }
 
+  .incorrect {
+    color: red;
+  }
+
   .kbd-navigation .square:focus {
     background: #ddd;
   }

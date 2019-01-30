@@ -107,9 +107,16 @@ class gameBoard {
 }
 
 function Square(props) {
+    let classNames = "square";
+    if (props.selected) {
+        classNames += " selected"
+    }
+    if (props.square.displayValue && props.square.trueValue !== props.square.displayValue) {
+        classNames += " incorrect"
+    }
     return (
     <button
-        className={"square" + (props.selected ? " selected" : "")}
+        className={classNames}
         onClick={() => props.onClick()}
     >
         {props.square.displayValue}
@@ -140,7 +147,7 @@ class Board extends React.Component {
 
     numberGuessed(i) {
         const board = this.state.gameBoard.clone();
-        board.square(this.state.selection.x, this.state.selection.y).displayValue = board.square(this.state.selection.x, this.state.selection.y).trueValue;
+        board.square(this.state.selection.x, this.state.selection.y).displayValue = i;
         this.setState({gameBoard: board});
     }
 
@@ -183,7 +190,7 @@ function Numbers(props) {
     function renderNumber(i) {
         return (<Number value={i} key={i} onClick={()=>{props.onClick(i);}}/>);
     }
-    for (let i = 0; i < 9; i++) {
+    for (let i = 1; i < 10; i++) {
         numbers.push(renderNumber(i));
     }
     return (
