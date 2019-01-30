@@ -94,25 +94,16 @@ class gameBoard {
     
 }
 
-class Square extends React.Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            value: null,
-            parent: null
-        }
-    }
-    render() {
-      return (
-        <button 
-            className="square"
-            onClick={() => this.props.onClick()}
-        >
-          {this.props.square.displayValue}
-        </button>
-      );
-    }
-  }
+function Square(props) {
+    return (
+    <button
+        className="square"
+        onClick={() => props.onClick()}
+    >
+        {props.square.displayValue}
+    </button>
+    );
+}
   
 class Board extends React.Component {
     constructor(props) {
