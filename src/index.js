@@ -129,6 +129,7 @@ class Board extends React.Component {
         return (
             <Square 
                 square={this.state.gameBoard.square(x, y)}
+                key={9 * y + x}
                 onClick={() => this.handleClick(x, y)}
             />
         );
@@ -147,7 +148,7 @@ class Board extends React.Component {
             for (let j = 0; j < 9; j++) {
                 children.push(this.renderSquare(j, i));
             }
-            grid.push(<div className="board-row">{children}</div>)
+            grid.push(<div className="board-row" key={i}>{children}</div>)
         }
         return grid;
     }
@@ -162,15 +163,39 @@ class Board extends React.Component {
     }
   }
   
-  class Game extends React.Component {
+function Number(props) {
+    return (
+        <button
+            className="number"
+            onClick={() => props.onClick()}
+        >
+            {props.value}
+        </button> 
+    );
+}
+
+function Numbers(props) {
+    const numbers = [];
+    function renderNumber(i) {
+        return (<Number value={i} key={i} onClick={props.onClick}/>);
+    }
+    for (let i = 0; i < 9; i++) {
+        numbers.push(renderNumber(i));
+    }
+    return (
+        <div className="number-container">{numbers}</div>
+    );
+}
+
+class Game extends React.Component {
     render() {
       return (
         <div className="game">
           <div className="game-board">
             <Board />
           </div>
+          <Numbers/>
           <div className="game-info">
-            <div>{/* status */}</div>
             <ol>{/* TODO */}</ol>
           </div>
         </div>
@@ -179,7 +204,6 @@ class Board extends React.Component {
   }
   
   // ========================================
-  
   ReactDOM.render(
     <Game />,
     document.getElementById('root')

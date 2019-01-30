@@ -51,9 +51,9 @@ body {
   .kbd-navigation .square:focus {
     background: #ddd;
   }
-  
+
   .game {
-    display: flex;
+    /*display: flex;*/
     flex-direction: row;
   }
   
