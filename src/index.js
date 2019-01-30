@@ -12,6 +12,12 @@ class gameSquare {
         this.x = x;
         this.y = y;
     }
+
+    copyValuesFrom(other) {
+        this.displayValue = other.displayValue;
+        this.trueValue = other.trueValue;
+        this.guesses = other.guesses.slice();
+    }
 }
 
 class gameBoard {
@@ -22,9 +28,15 @@ class gameBoard {
                 this.array.push(new gameSquare(this, i, j));
             }
         }
-        this.generate();
     }
 
+    clone() {
+        const newBoard = new gameBoard();
+        for (let i = 0; i < 81; i++) {
+            newBoard.array[i].copyValuesFrom(this.array[i]);
+        }
+        return newBoard;
+    }
     setSudoku(trueValues, displayValues) {
         if (trueValues.length !== 81) throw Error('Wrong trueValues array length');
         if (displayValues.length !== 81) throw Error('Wrong displayValues array length');
@@ -111,6 +123,7 @@ class Board extends React.Component {
         this.state = {
             gameBoard: new gameBoard()
         }
+        this.state.gameBoard.generate();
     }
     renderSquare(x, y) {
         return (
@@ -122,7 +135,9 @@ class Board extends React.Component {
       }
 
     handleClick(x, y) {
-        console.log(this.state.gameBoard.square(x, y).trueValue);
+        const board = this.state.gameBoard.clone();
+        board.square(x, y).displayValue = board.square(x, y).trueValue;
+        this.setState({gameBoard: board});
     }
   
     createGrid() {
