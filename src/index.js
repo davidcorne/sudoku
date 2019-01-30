@@ -244,7 +244,12 @@ class Game extends React.Component {
     }
 
     undoClicked() {
-        
+        if (this.state.history.length > 1) {
+            this.setState({
+                history: this.state.history.slice(0, this.state.history.length - 1),
+                selection: this.state.selection
+            })
+        }
     }
 
     editModeClicked() {
