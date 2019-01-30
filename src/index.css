@@ -38,18 +38,15 @@ body {
     padding: 0;
     text-align: center;
     width: 34px;
+    color: blue;
   }
 
-  .square {
-      font-size: 14px;
-  }
-  
   .square:focus {
     outline: none;
   }
   
   .selected {
-    background: #c1d9ff;
+    background: #dce8fc;
   }
 
   .incorrect {
@@ -57,7 +54,27 @@ body {
   }
 
   .starting {
-    color: blue;
+    color: black;
+  }
+
+  .number {
+    background: #fff;
+    color: grey;
+    border: none;
+    float: left;
+    font-size: 24px;
+    font-weight: bold;
+    line-height: 34px;
+    height: 34px;
+    margin-right: -1px;
+    margin-top: 10px;
+    padding: 0;
+    text-align: center;
+    width: 34px;
+  }
+
+  .number:focus {
+    outline: none;
   }
 
   .kbd-navigation .square:focus {
