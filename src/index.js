@@ -121,7 +121,7 @@ function Square(props) {
     if (props.square.starting) {
         classNames += " starting";
     }
-    //??? These seem to ahve x/y swapped from what I think. But everything else seems to be fine...
+    //??? These seem to have x/y swapped from what I think. But everything else seems to be fine...
     if (props.square.y % 3 === 2) {
         classNames += " column-end"
     }
