@@ -218,15 +218,44 @@ function Numbers(props) {
     );
 }
 
+class Tools extends React.Component {
+    constructor(props) {
+        super(props);
+    }
+
+    render() {
+        return (
+            <div className="tools">
+                <button onClick={() => this.props.undoClicked()}>
+                    Undo
+                </button>
+                <button onClick={() => this.props.editModeClicked()}>
+                    Edit Mode
+                </button>
+            </div>
+        )
+    }
+}
 class Game extends React.Component {
     constructor(props) {
         super(props);
         this.numberGuessedCallback = null;
+        this.state = {
+            history: []
+        }
     }
 
     numberGuessed(i) {
         if (!this.numberGuessedCallback) throw Error('numberGuessedCallback should be set.')
         this.numberGuessedCallback(i);
+    }
+
+    undoClicked() {
+
+    }
+
+    editModeClicked() {
+
     }
 
     render() {
@@ -235,6 +264,10 @@ class Game extends React.Component {
           <div className="game-board">
             <Board parent={this}/>
           </div>
+          <Tools 
+            undoClicked={()=>this.undoClicked()}
+            editModeClicked={()=>this.editModeClicked()}
+          />
           <Numbers onClick={(i)=>{this.numberGuessed(i);}}/>
           <div className="game-info">
             <ol>{/* TODO */}</ol>
