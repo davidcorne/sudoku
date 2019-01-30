@@ -30,8 +30,8 @@ class gameBoard {
         if (displayValues.length !== 81) throw Error('Wrong displayValues array length');
         for (let i = 0; i < 9; i++) {
             for (let j = 0; j < 9; j++) {
-                this.square(i, j).trueValue = trueValues[i * 9 + j];
-                this.square(i, j).displayValue = displayValues[i * 9 + j];
+                this.square(i, j).trueValue = trueValues[j * 9 + i];
+                this.square(i, j).displayValue = displayValues[j * 9 + i];
             }
         }
 
@@ -89,7 +89,7 @@ class gameBoard {
     square(x, y) {
         if (0 > x || x > 8) throw Error('Wrong x coordinate: ' + x);
         if (0 > y || y > 8) throw Error('Wrong y coordinate: ' + y);
-        return this.array[x * 9 + y];
+        return this.array[y * 9 + x];
     }
     
 }
