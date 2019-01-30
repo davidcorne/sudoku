@@ -73,15 +73,15 @@ class gameBoard {
         // 9 2 8 | 0 0 0 | 0 6 0 
 
         const displayValues = [
-            0, 4, 0, 0, 0, 0, 1, 7, 9, 
-            0, 0, 2, 0, 0, 8, 0, 5, 4, 
-            0, 0, 6, 0, 0, 5, 0, 0, 8, 
-            0, 8, 0, 0, 7, 0, 9, 1, 0, 
-            0, 5, 0, 0, 9, 0, 0, 3, 0, 
-            0, 1, 9, 0, 6, 0, 0, 4, 0, 
-            3, 0, 0, 4, 0, 0, 7, 0, 0, 
-            5, 7, 0, 1, 0, 0, 2, 0, 0, 
-            9, 2, 8, 0, 0, 0, 0, 6, 0, 
+            null, 4, null, null, null, null, 1, 7, 9, 
+            null, null, 2, null, null, 8, null, 5, 4, 
+            null, null, 6, null, null, 5, null, null, 8, 
+            null, 8, null, null, 7, null, 9, 1, null, 
+            null, 5, null, null, 9, null, null, 3, null, 
+            null, 1, 9, null, 6, null, null, 4, null, 
+            3, null, null, 4, null, null, 7, null, null, 
+            5, 7, null, 1, null, null, 2, null, null, 
+            9, 2, 8, null, null, null, null, 6, null, 
         ]
         this.setSudoku(trueValues, displayValues);
     }
