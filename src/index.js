@@ -206,6 +206,9 @@ class Tools extends React.Component {
                 <button onClick={() => this.props.editModeClicked()}>
                     Edit Mode
                 </button>
+                <button onClick={() => this.props.clearClicked()}>
+                    Clear
+                </button>
             </div>
         )
     }
@@ -251,7 +254,16 @@ class Game extends React.Component {
     }
 
     editModeClicked() {
+    }
 
+    clearClicked() {
+        const history = this.state.history;
+        const board = this.currentBoard().clone();
+        const selection = this.state.selection;
+        board.square(selection.x, selection.y).displayValue = null;
+        this.setState({
+            history: history.concat([board])
+        });
     }
 
     render() {
@@ -267,6 +279,7 @@ class Game extends React.Component {
           <Tools 
             undoClicked={()=>this.undoClicked()}
             editModeClicked={()=>this.editModeClicked()}
+            clearClicked={() => this.clearClicked()}
           />
           <Numbers onClick={(i)=>{this.numberGuessed(i);}}/>
           <div className="game-info">
