@@ -163,13 +163,7 @@ class Board extends React.Component {
         return grid;
     }
     render() {
-        const status = 'Next player: X';
-        return (
-            <div>
-                <div className="status">{status}</div>
-                {this.createGrid()}
-            </div>
-        );
+        return this.createGrid();
     }
   }
   
