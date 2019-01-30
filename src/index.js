@@ -1,6 +1,30 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+
 import './index.css';
+
+class gameSquare {
+    constructor(grid) {
+        this.grid = grid;
+        this.value = null;
+        this.trueValue = null;
+    }
+}
+
+class gameGrid {
+    constructor(board) {
+        this.board = board;
+        this.array = Array(9).fill(new gameSquare(this));
+    }
+}
+
+class gameBoard {
+    constructor() {
+        this.array = Array(9).fill(new gameGrid(this));
+    }
+    
+}
+
 
 class Square extends React.Component {
     constructor(props) {
@@ -20,65 +44,36 @@ class Square extends React.Component {
     }
   }
   
-class Grid extends React.Component {
+class Board extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
+            gameBoard: new gameBoard()
         }
     }
     renderSquare(x, y) {
-        return <Square x={x} y={y}/>;
-    }
-      
-    render() {
-        return (<div className="grid">
-          <div className="grid-row">
-            {this.renderSquare(0, 0)}
-            {this.renderSquare(0, 1)}
-            {this.renderSquare(0, 2)}
-          </div>
-          <div className="grid-row">
-            {this.renderSquare(1, 0)}
-            {this.renderSquare(1, 1)}
-            {this.renderSquare(1, 2)}
-          </div>
-          <div className="grid-row">
-            {this.renderSquare(2, 0)}
-            {this.renderSquare(2, 1)}
-            {this.renderSquare(2, 2)}
-          </div>
-        </div>
-        );
-    }
-  }
-  class Board extends React.Component {
-    renderGrid(x, y) {
-        return (<Grid x={x} y={y}/>);
+        return (<Square x={x} y={y}/>);
       }
   
+    createGrid() {
+        let grid = [];
+        for (let i = 0; i < 9; i++) {
+            let children = [];
+            for (let j = 0; j < 9; j++) {
+                children.push(this.renderSquare(j, i));
+            }
+            grid.push(<div className="board-row">{children}</div>)
+        }
+        return grid;
+    }
     render() {
-      const status = 'Next player: X';
-  
-      return (
-        <div>
-          <div className="status">{status}</div>
-          <div className="board-row">
-            {this.renderGrid(0, 0)}
-            {this.renderGrid(0, 1)}
-            {this.renderGrid(0, 2)}
-          </div>
-          <div className="board-row">
-            {this.renderGrid(1, 0)}
-            {this.renderGrid(1, 1)}
-            {this.renderGrid(1, 2)}
-          </div>
-          <div className="board-row">
-            {this.renderGrid(2, 0)}
-            {this.renderGrid(2, 1)}
-            {this.renderGrid(2, 2)}
-          </div>
-        </div>
-      );
+        const status = 'Next player: X';
+        return (
+            <div>
+                <div className="status">{status}</div>
+                {this.createGrid()}
+            </div>
+        );
     }
   }
   
