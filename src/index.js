@@ -125,6 +125,7 @@ class Board extends React.Component {
             selection: {x: 0, y: 0}
         }
         this.state.gameBoard.generate();
+        this.props.parent.numberGuessedCallback = (i) => {this.numberGuessed(i);};
     }
     renderSquare(x, y) {
         return (
@@ -137,14 +138,17 @@ class Board extends React.Component {
         );
     }
 
+    numberGuessed(i) {
+        const board = this.state.gameBoard.clone();
+        board.square(this.state.selection.x, this.state.selection.y).displayValue = board.square(this.state.selection.x, this.state.selection.y).trueValue;
+        this.setState({gameBoard: board});
+    }
+
     handleClick(x, y) {
         this.setState({
             gameBoard: this.state.gameBoard,
             selection: {x: x, y: y}
         })
-        // const board = this.state.gameBoard.clone();
-        // board.square(x, y).displayValue = board.square(x, y).trueValue;
-        // this.setState({gameBoard: board});
     }
   
     createGrid() {
@@ -194,15 +198,21 @@ function Numbers(props) {
 }
 
 class Game extends React.Component {
+    constructor(props) {
+        super(props);
+        this.numberGuessedCallback = null;
+    }
+
     numberGuessed(i) {
-        alert('Number ' + i + ' guessed.')
+        if (!this.numberGuessedCallback) throw Error('numberGuessedCallback should be set.')
+        this.numberGuessedCallback(i);
     }
 
     render() {
       return (
         <div className="game">
           <div className="game-board">
-            <Board />
+            <Board parent={this}/>
           </div>
           <Numbers onClick={(i)=>{this.numberGuessed(i);}}/>
           <div className="game-info">
