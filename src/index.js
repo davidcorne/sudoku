@@ -109,7 +109,7 @@ class gameBoard {
 function Square(props) {
     return (
     <button
-        className="square"
+        className={"square" + (props.selected ? " selected" : "")}
         onClick={() => props.onClick()}
     >
         {props.square.displayValue}
@@ -121,7 +121,8 @@ class Board extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            gameBoard: new gameBoard()
+            gameBoard: new gameBoard(),
+            selection: {x: 0, y: 0}
         }
         this.state.gameBoard.generate();
     }
@@ -131,14 +132,19 @@ class Board extends React.Component {
                 square={this.state.gameBoard.square(x, y)}
                 key={9 * y + x}
                 onClick={() => this.handleClick(x, y)}
+                selected={this.state.selection.x === x && this.state.selection.y === y}
             />
         );
-      }
+    }
 
     handleClick(x, y) {
-        const board = this.state.gameBoard.clone();
-        board.square(x, y).displayValue = board.square(x, y).trueValue;
-        this.setState({gameBoard: board});
+        this.setState({
+            gameBoard: this.state.gameBoard,
+            selection: {x: x, y: y}
+        })
+        // const board = this.state.gameBoard.clone();
+        // board.square(x, y).displayValue = board.square(x, y).trueValue;
+        // this.setState({gameBoard: board});
     }
   
     createGrid() {
@@ -177,7 +183,7 @@ function Number(props) {
 function Numbers(props) {
     const numbers = [];
     function renderNumber(i) {
-        return (<Number value={i} key={i} onClick={props.onClick}/>);
+        return (<Number value={i} key={i} onClick={()=>{props.onClick(i);}}/>);
     }
     for (let i = 0; i < 9; i++) {
         numbers.push(renderNumber(i));
@@ -188,13 +194,17 @@ function Numbers(props) {
 }
 
 class Game extends React.Component {
+    numberGuessed(i) {
+        alert('Number ' + i + ' guessed.')
+    }
+
     render() {
       return (
         <div className="game">
           <div className="game-board">
             <Board />
           </div>
-          <Numbers/>
+          <Numbers onClick={(i)=>{this.numberGuessed(i);}}/>
           <div className="game-info">
             <ol>{/* TODO */}</ol>
           </div>

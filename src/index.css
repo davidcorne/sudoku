@@ -48,6 +48,10 @@ body {
     outline: none;
   }
   
+  .selected {
+    background: #c1d9ff;
+  }
+
   .kbd-navigation .square:focus {
     background: #ddd;
   }
