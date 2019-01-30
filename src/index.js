@@ -9,7 +9,7 @@ class gameSquare {
         this.displayValue = null;
         this.trueValue = null;
         this.starting = null;
-        this.guesses = [];
+        this.possibilities = [];
         this.x = x;
         this.y = y;
     }
@@ -17,7 +17,7 @@ class gameSquare {
     copyValuesFrom(other) {
         this.displayValue = other.displayValue;
         this.trueValue = other.trueValue;
-        this.guesses = other.guesses.slice();
+        this.possibilities = other.possibilities.slice();
         this.starting = other.starting;
     }
 }
