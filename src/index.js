@@ -145,39 +145,17 @@ function Square(props) {
 }
   
 class Board extends React.Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            gameBoard: new gameBoard(),
-            selection: {x: 0, y: 0}
-        }
-        this.state.gameBoard.generate();
-        this.props.parent.numberGuessedCallback = (i) => {this.numberGuessed(i);};
-    }
     renderSquare(x, y) {
         return (
             <Square 
-                square={this.state.gameBoard.square(x, y)}
+                square={this.props.gameBoard.square(x, y)}
                 key={9 * y + x}
-                onClick={() => this.handleClick(x, y)}
-                selected={this.state.selection.x === x && this.state.selection.y === y}
+                onClick={() => this.props.handleClick(x, y)}
+                selected={this.props.selection.x === x && this.props.selection.y === y}
             />
         );
     }
 
-    numberGuessed(i) {
-        const board = this.state.gameBoard.clone();
-        board.square(this.state.selection.x, this.state.selection.y).displayValue = i;
-        this.setState({gameBoard: board});
-    }
-
-    handleClick(x, y) {
-        this.setState({
-            gameBoard: this.state.gameBoard,
-            selection: {x: x, y: y}
-        })
-    }
-  
     createGrid() {
         let grid = [];
         for (let i = 0; i < 9; i++) {
@@ -219,10 +197,6 @@ function Numbers(props) {
 }
 
 class Tools extends React.Component {
-    constructor(props) {
-        super(props);
-    }
-
     render() {
         return (
             <div className="tools">
@@ -241,17 +215,36 @@ class Game extends React.Component {
         super(props);
         this.numberGuessedCallback = null;
         this.state = {
-            history: []
+            history: [new gameBoard()],
+            selection: {x:0, y:0}
         }
+        this.state.history[0].generate();
+    }
+
+    currentBoard() {
+        return this.state.history[this.state.history.length - 1];
     }
 
     numberGuessed(i) {
-        if (!this.numberGuessedCallback) throw Error('numberGuessedCallback should be set.')
-        this.numberGuessedCallback(i);
+        const history = this.state.history;
+        const board = this.currentBoard().clone();
+        const selection = this.state.selection;
+        board.square(selection.x, selection.y).displayValue = i;
+        this.setState({
+            history: history.concat([board]),
+            selection: selection
+        });
+    }
+
+    handleClick(x, y) {
+        this.setState({
+            history: this.state.history,
+            selection: {x: x, y: y}
+        })
     }
 
     undoClicked() {
-
+        
     }
 
     editModeClicked() {
@@ -262,7 +255,11 @@ class Game extends React.Component {
       return (
         <div className="game">
           <div className="game-board">
-            <Board parent={this}/>
+            <Board 
+                selection={this.state.selection} 
+                gameBoard={this.currentBoard()}
+                handleClick={(x, y) => this.handleClick(x, y)}
+            />
           </div>
           <Tools 
             undoClicked={()=>this.undoClicked()}
