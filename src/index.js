@@ -229,14 +229,18 @@ class Game extends React.Component {
         return this.state.history[this.state.history.length - 1];
     }
 
-    numberGuessed(i) {
+    changeSquare(value) {
         const history = this.state.history;
         const board = this.currentBoard().clone();
         const selection = this.state.selection;
-        board.square(selection.x, selection.y).displayValue = i;
+        board.square(selection.x, selection.y).displayValue = value;
         this.setState({
             history: history.concat([board])
         });
+    }
+
+    numberGuessed(i) {
+        this.changeSquare(i);
     }
 
     handleClick(x, y) {
@@ -257,13 +261,7 @@ class Game extends React.Component {
     }
 
     clearClicked() {
-        const history = this.state.history;
-        const board = this.currentBoard().clone();
-        const selection = this.state.selection;
-        board.square(selection.x, selection.y).displayValue = null;
-        this.setState({
-            history: history.concat([board])
-        });
+        this.changeSquare(null);
     }
 
     render() {
