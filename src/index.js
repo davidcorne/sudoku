@@ -291,6 +291,8 @@ class Game extends React.Component {
             this.numberGuessed(parseInt(event.key));
         } else if (event.key.startsWith('Arrow')) {
             this.arrowDown(event.key);
+        } else if (['Backspace', 'Delete'].includes(event.key)) {
+            this.clearClicked();
         }
     }
 
