@@ -233,7 +233,10 @@ class Game extends React.Component {
         const history = this.state.history;
         const board = this.currentBoard().clone();
         const selection = this.state.selection;
-        board.square(selection.x, selection.y).displayValue = value;
+        const square = board.square(selection.x, selection.y);
+        if (!square.starting) {
+            square.displayValue = value;
+        }
         this.setState({
             history: history.concat([board])
         });
