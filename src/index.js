@@ -252,6 +252,32 @@ class Game extends React.Component {
         })
     }
 
+    moveSelection(direction) {
+        const clampToLimits = function (number) {
+            return Math.min(Math.max(0, number), 8);
+        };
+        const existingSelection = this.state.selection;
+        const newSelection = {
+            x: clampToLimits(existingSelection.x + direction.x),
+            y: clampToLimits(existingSelection.y + direction.y),
+        }
+        this.setState({selection: newSelection});
+    }
+
+    arrowPressed(arrow) {
+        const direction = {x: 0, y: 0};
+        if (arrow === 'ArrowUp') {
+            direction.y = -1;
+        } else if (arrow === 'ArrowDown') {
+            direction.y = 1;
+        } else if (arrow === 'ArrowLeft') {
+            direction.x = -1;
+        } else if (arrow === 'ArrowRight') {
+            direction.x = 1;
+        }
+        this.moveSelection(direction);
+    }
+
     undoClicked() {
         if (this.state.history.length > 1) {
             this.setState({
@@ -263,8 +289,11 @@ class Game extends React.Component {
     handleKeyPress(event) {
         if (['1', '2', '3', '4', '5', '6', '7', '8', '9', '0'].includes(event.key)) {
             this.numberGuessed(parseInt(event.key));
+        } else if (event.key.startsWith('Arrow')) {
+            this.arrowPressed(event.key);
         }
     }
+
     editModeClicked() {
     }
 
@@ -274,7 +303,7 @@ class Game extends React.Component {
 
     render() {
       return (
-        <div className="game" onKeyPress={(event) => this.handleKeyPress(event)}>
+        <div className="game" onKeyDown={(event) => this.handleKeyPress(event)}>
           <div className="game-board">
             <Board 
                 selection={this.state.selection} 
