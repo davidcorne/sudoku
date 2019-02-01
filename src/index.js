@@ -260,6 +260,11 @@ class Game extends React.Component {
         }
     }
 
+    handleKeyPress(event) {
+        if (['1', '2', '3', '4', '5', '6', '7', '8', '9', '0'].includes(event.key)) {
+            this.numberGuessed(parseInt(event.key));
+        }
+    }
     editModeClicked() {
     }
 
@@ -269,7 +274,7 @@ class Game extends React.Component {
 
     render() {
       return (
-        <div className="game">
+        <div className="game" onKeyPress={(event) => this.handleKeyPress(event)}>
           <div className="game-board">
             <Board 
                 selection={this.state.selection} 
