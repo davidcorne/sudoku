@@ -264,7 +264,7 @@ class Game extends React.Component {
         this.setState({selection: newSelection});
     }
 
-    arrowPressed(arrow) {
+    arrowDown(arrow) {
         const direction = {x: 0, y: 0};
         if (arrow === 'ArrowUp') {
             direction.y = -1;
@@ -286,11 +286,11 @@ class Game extends React.Component {
         }
     }
 
-    handleKeyPress(event) {
+    handleKeyDown(event) {
         if (['1', '2', '3', '4', '5', '6', '7', '8', '9', '0'].includes(event.key)) {
             this.numberGuessed(parseInt(event.key));
         } else if (event.key.startsWith('Arrow')) {
-            this.arrowPressed(event.key);
+            this.arrowDown(event.key);
         }
     }
 
@@ -303,7 +303,7 @@ class Game extends React.Component {
 
     render() {
       return (
-        <div className="game" onKeyDown={(event) => this.handleKeyPress(event)}>
+        <div className="game" onKeyDown={(event) => this.handleKeyDown(event)}>
           <div className="game-board">
             <Board 
                 selection={this.state.selection} 
