@@ -253,13 +253,13 @@ class Game extends React.Component {
     }
 
     moveSelection(direction) {
-        const clampToLimits = function (number) {
+        const clampToGrid = function (number) {
             return Math.min(Math.max(0, number), 8);
         };
         const existingSelection = this.state.selection;
         const newSelection = {
-            x: clampToLimits(existingSelection.x + direction.x),
-            y: clampToLimits(existingSelection.y + direction.y),
+            x: clampToGrid(existingSelection.x + direction.x),
+            y: clampToGrid(existingSelection.y + direction.y),
         }
         this.setState({selection: newSelection});
     }
