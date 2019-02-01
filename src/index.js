@@ -287,7 +287,7 @@ class Game extends React.Component {
     }
 
     handleKeyPress(event) {
-        if (['1', '2', '3', '4', '5', '6', '7', '8', '9', '0'].includes(event.key)) {
+        if (['1', '2', '3', '4', '5', '6', '7', '8', '9'].includes(event.key)) {
             this.numberGuessed(parseInt(event.key));
         } else if (event.key.startsWith('Arrow')) {
             this.arrowPressed(event.key);
