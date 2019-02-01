@@ -203,6 +203,9 @@ class Tools extends React.Component {
                 <button onClick={() => this.props.undoClicked()}>
                     Undo
                 </button>
+                <button onClick={() => this.props.redoClicked()}>
+                    Redo
+                </button>
                 <button onClick={() => this.props.editModeClicked()}>
                     Edit Mode
                 </button>
@@ -219,6 +222,7 @@ class Game extends React.Component {
         this.numberGuessedCallback = null;
         this.state = {
             history: [new gameBoard()],
+            historyPointer: 0,
             selection: {x:0, y:0},
             pencil: false
         }
@@ -226,11 +230,12 @@ class Game extends React.Component {
     }
 
     currentBoard() {
-        return this.state.history[this.state.history.length - 1];
+        return this.state.history[this.state.historyPointer];
     }
 
     changeSquare(value) {
-        const history = this.state.history;
+        const history = this.state.history.slice(0, this.state.historyPointer + 1);
+        console.log(history);
         const board = this.currentBoard().clone();
         const selection = this.state.selection;
         const square = board.square(selection.x, selection.y);
@@ -238,7 +243,8 @@ class Game extends React.Component {
             square.displayValue = value;
         }
         this.setState({
-            history: history.concat([board])
+            history: history.concat([board]),
+            historyPointer: history.length
         });
     }
 
@@ -279,9 +285,17 @@ class Game extends React.Component {
     }
 
     undoClicked() {
-        if (this.state.history.length > 1) {
+        if (this.state.historyPointer > 0) {
             this.setState({
-                history: this.state.history.slice(0, this.state.history.length - 1)
+                historyPointer: this.state.historyPointer - 1
+            })
+        }
+    }
+
+    redoClicked() {
+        if (this.state.historyPointer < this.state.history.length - 1) {
+            this.setState({
+                historyPointer: this.state.historyPointer + 1
             })
         }
     }
@@ -313,6 +327,7 @@ class Game extends React.Component {
           </div>
           <Tools 
             undoClicked={()=>this.undoClicked()}
+            redoClicked={()=>this.redoClicked()}
             editModeClicked={()=>this.editModeClicked()}
             clearClicked={() => this.clearClicked()}
           />
