@@ -200,10 +200,10 @@ class Tools extends React.Component {
     render() {
         return (
             <div className="tools">
-                <button onClick={() => this.props.undoClicked()}>
+                <button onClick={() => this.props.undoClicked()} disabled={this.props.undoDisabled}>
                     Undo
                 </button>
-                <button onClick={() => this.props.redoClicked()}>
+                <button onClick={() => this.props.redoClicked()} disabled={this.props.redoDisabled}>
                     Redo
                 </button>
                 <button onClick={() => this.props.editModeClicked()}>
@@ -327,7 +327,9 @@ class Game extends React.Component {
           </div>
           <Tools 
             undoClicked={()=>this.undoClicked()}
+            undoDisabled={this.state.historyPointer === 0}
             redoClicked={()=>this.redoClicked()}
+            redoDisabled={this.state.historyPointer === this.state.history.length - 1}
             editModeClicked={()=>this.editModeClicked()}
             clearClicked={() => this.clearClicked()}
           />
