@@ -288,7 +288,9 @@ class Game extends React.Component {
     }
 
     numberGuessed(i) {
-        this.changeSquare(i);
+        if (!this.state.pencil) {
+            this.changeSquare(i);
+        }
     }
 
     handleClick(x, y) {
