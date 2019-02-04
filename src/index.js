@@ -58,11 +58,18 @@ class gameBoard {
     }
 
     neighbors(x, y) {
-        // just return the row and column for now...
         const neighbors = [];
+        const columnStart = 3 * Math.floor(x / 3);
+        const rowStart = 3 * Math.floor(y / 3);
+        for (let i = 0; i < 3; i++) {
+            for (let j = 0; j < 3; j++) {
+                neighbors.push(this.square(rowStart + i, columnStart + j));
+            }
+        }
         for (let i = 0; i < 9; i++) {
-            neighbors.push(this.square(x, i));
-            neighbors.push(this.square(i, y));
+            // This will currently add the row/column it shares in it's square twice. Probably OK.
+            neighbors.push(this.square(i, x));
+            neighbors.push(this.square(y, i));
         }
         return neighbors;
     }    
