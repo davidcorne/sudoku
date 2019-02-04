@@ -100,6 +100,8 @@ class gameBoard {
             9, 2, 8, null, null, null, null, 6, null, 
         ]
         this.setSudoku(trueValues, displayValues);
+        this.array[0].possibilities.push(8);
+        this.array[0].possibilities.push(5);
     }
 
     square(x, y) {
