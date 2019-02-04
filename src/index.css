@@ -77,7 +77,7 @@ ul {
 
 .number {
     background: #fff;
-    color: grey;
+    color: blue;
     border: none;
     float: left;
     font-size: 24px;
@@ -89,6 +89,10 @@ ul {
     padding: 0;
     text-align: center;
     width: 34px;
+}
+
+.pencil {
+    color: grey;
 }
 
 .possibilities {

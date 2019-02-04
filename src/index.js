@@ -212,9 +212,10 @@ class Board extends React.Component {
   }
   
 function Number(props) {
+    const className = "number" + (props.pencil ? " pencil" : "");
     return (
         <button
-            className="number"
+            className={className}
             onClick={() => props.onClick()}
         >
             {props.value}
@@ -225,11 +226,12 @@ function Number(props) {
 function Numbers(props) {
     const numbers = [];
     function renderNumber(i) {
-        return (<Number value={i} key={i} onClick={()=>{props.onClick(i);}}/>);
+        return (<Number value={i} key={i} onClick={()=>{props.onClick(i);}} pencil={props.pencil}/>);
     }
     for (let i = 1; i < 10; i++) {
         numbers.push(renderNumber(i));
     }
+    
     return (
         <div className="number-container">{numbers}</div>
     );
@@ -355,6 +357,7 @@ class Game extends React.Component {
     }
 
     editModeClicked() {
+        this.setState({pencil: !this.state.pencil});
     }
 
     clearClicked() {
@@ -379,7 +382,7 @@ class Game extends React.Component {
             editModeClicked={()=>this.editModeClicked()}
             clearClicked={() => this.clearClicked()}
           />
-          <Numbers onClick={(i)=>{this.numberGuessed(i);}}/>
+          <Numbers onClick={(i)=>{this.numberGuessed(i);}} pencil={this.state.pencil}/>
           <div className="game-info">
             <ol>{/* TODO */}</ol>
           </div>
