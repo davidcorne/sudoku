@@ -20,6 +20,12 @@ class gameSquare {
         this.possibilities = other.possibilities.slice();
         this.starting = other.starting;
     }
+
+    change(value) {
+        if ('displayValue' in value) {
+            this.displayValue = value.displayValue;
+        }
+    }
 }
 
 class gameBoard {
@@ -279,7 +285,7 @@ class Game extends React.Component {
         const square = board.square(this.state.selection.x, this.state.selection.y);
         if (!square.starting) {
             const history = this.state.history.slice(0, this.state.historyPointer + 1);
-            square.displayValue = value;
+            square.change(value);
             this.setState({
                 history: history.concat([board]),
                 historyPointer: history.length
@@ -289,7 +295,7 @@ class Game extends React.Component {
 
     numberGuessed(i) {
         if (!this.state.pencil) {
-            this.changeSquare(i);
+        this.changeSquare({displayValue: i});
         }
     }
 
@@ -362,7 +368,7 @@ class Game extends React.Component {
     }
 
     clearClicked() {
-        this.changeSquare(null);
+        this.changeSquare({displayValue: null});
     }
 
     render() {
