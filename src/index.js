@@ -174,14 +174,12 @@ function Square(props) {
         content = new PossibilityGrid(props);
     }
     return (
-        <div className={classNames}>
-            <button
-                className={classNames}
-                onClick={() => props.onClick()}
-            >
-                {content}
-            </button>
-        </div>
+        <button
+            className={classNames}
+            onClick={() => props.onClick()}
+        >
+            {content}
+        </button>
     );
 }
   
