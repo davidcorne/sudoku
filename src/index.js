@@ -363,12 +363,12 @@ class Game extends React.Component {
         } else if (['Backspace', 'Delete'].includes(event.key)) {
             this.clearClicked();
         } else if (event.ctrlKey) {
-            if (event.key === 'z') {
+            if (event.key === 'z' || event.key === 'Z') {
                 this.undoClicked();
-            } else if (event.key === 'y') {
+            } else if (event.key === 'y' || event.key === 'Y') {
                 this.redoClicked();
             }
-        } else if (event.key === 'e') {
+        } else if (event.key === 'e' || event.key === 'E') {
             this.editModeClicked();
         }
     }
