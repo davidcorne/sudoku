@@ -112,6 +112,14 @@ class gameBoard {
     
 }
 
+function PossibilityGrid(props) {
+    return (
+        <div className="possibilities">
+            {props.square.possibilities}
+        </div>
+    );
+}
+
 function Square(props) {
     let classNames = "square";
     if (props.selected) {
@@ -136,13 +144,22 @@ function Square(props) {
     if (props.square.x === 0) {
         classNames += " row-start"
     }
+    let content = null;
+    if (props.square.displayValue) {
+        // This square has a value, display that
+        content = props.square.displayValue
+    } else {
+        content = new PossibilityGrid(props);
+    }
     return (
-        <button
-            className={classNames}
-            onClick={() => props.onClick()}
-        >
-            {props.square.displayValue}
-        </button>
+        <div className={classNames}>
+            <button
+                className={classNames}
+                onClick={() => props.onClick()}
+            >
+                {content}
+            </button>
+        </div>
     );
 }
   
