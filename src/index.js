@@ -38,6 +38,13 @@ class gameSquare {
         this.displayValue = i;
         this.numberGuessedCallback(this.x, this.y, i);
     }
+
+    eliminate(i) {
+        const index = this.notes.indexOf(i);
+        if (index > -1) {
+            this.notes.splice(index, 1);
+        }
+    }
 }
 
 class gameBoard {
@@ -50,8 +57,21 @@ class gameBoard {
         }
     }
 
-    numberGuessed(x, y, i) {
+    neighbors(x, y) {
+        // just return the row and column for now...
+        const neighbors = [];
+        for (let i = 0; i < 9; i++) {
+            neighbors.push(this.square(x, i));
+            neighbors.push(this.square(i, y));
+        }
+        return neighbors;
+    }    
 
+    numberGuessed(x, y, i) {
+        const neighbors = this.neighbors(x, y);
+        neighbors.forEach(square => {
+            square.eliminate(i);
+        });
     }
 
     clone() {
