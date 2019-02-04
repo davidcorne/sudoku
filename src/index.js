@@ -25,6 +25,14 @@ class gameSquare {
         this.displayValue = null;
         this.possibilities = [];
     }
+
+    possibility(i) {
+        if (i in this.possibilities) {
+            this.possibilities.splice(this.possibilities.indexOf(i), 1);
+        } else {
+            this.possibilities.push(i);
+        }
+    }
 }
 
 class gameBoard {
@@ -295,6 +303,8 @@ class Game extends React.Component {
     numberGuessed(i) {
         if (!this.state.pencil) {
             this.changeSquare((square) => {square.displayValue = i;});
+        } else {
+            this.changeSquare((square) => {square.possibility(i);});
         }
     }
 
