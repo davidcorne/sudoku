@@ -368,6 +368,8 @@ class Game extends React.Component {
             } else if (event.key === 'y') {
                 this.redoClicked();
             }
+        } else if (event.key === 'e') {
+            this.editModeClicked();
         }
     }
 
