@@ -100,7 +100,7 @@ class gameBoard {
             9, 2, 8, null, null, null, null, 6, null, 
         ]
         this.setSudoku(trueValues, displayValues);
-        this.array[0].possibilities = [1, 2, 3, 4, 5, 6, 7, 8, 9];
+        this.array[0].possibilities = [1, 3, 5, 7, 9];
     }
 
     square(x, y) {
@@ -112,31 +112,31 @@ class gameBoard {
 }
 
 function PossibilityGrid(props) {
-    const one = props.square.possibilities.includes(1) ? '1' : ' ';
-    const two = props.square.possibilities.includes(2) ? '2' : ' ';
-    const three = props.square.possibilities.includes(3) ? '3' : ' ';
-    const four = props.square.possibilities.includes(4) ? '4' : ' ';
-    const five = props.square.possibilities.includes(5) ? '5' : ' ';
-    const six = props.square.possibilities.includes(6) ? '6' : ' ';
-    const seven = props.square.possibilities.includes(7) ? '7' : ' ';
-    const eight = props.square.possibilities.includes(8) ? '8' : ' ';
-    const nine = props.square.possibilities.includes(9) ? '9' : ' ';
+    const one = props.square.possibilities.includes(1) ? '' : 'blank';
+    const two = props.square.possibilities.includes(2) ? '' : 'blank';
+    const three = props.square.possibilities.includes(3) ? '' : 'blank';
+    const four = props.square.possibilities.includes(4) ? '' : 'blank';
+    const five = props.square.possibilities.includes(5) ? '' : 'blank';
+    const six = props.square.possibilities.includes(6) ? '' : 'blank';
+    const seven = props.square.possibilities.includes(7) ? '' : 'blank';
+    const eight = props.square.possibilities.includes(8) ? '' : 'blank';
+    const nine = props.square.possibilities.includes(9) ? '' : 'blank';
     return (
         <div className="possibilities">
             <div className="possibility-row">
-                <div className="possibility-cell">{one}</div>
-                <div className="possibility-cell">{two}</div>
-                <div className="possibility-cell">{three}</div>
+                <div className={"possibility-cell " + one}>1</div>
+                <div className={"possibility-cell " + two}>2</div>
+                <div className={"possibility-cell " + three}>3</div>
             </div>
             <div className="possibility-row">
-                <div className="possibility-cell">{four}</div>
-                <div className="possibility-cell">{five}</div>
-                <div className="possibility-cell">{six}</div>
+                <div className={"possibility-cell " + four}>4</div>
+                <div className={"possibility-cell " + five}>5</div>
+                <div className={"possibility-cell " + six}>6</div>
             </div>
             <div className="possibility-row">
-                <div className="possibility-cell">{seven}</div>
-                <div className="possibility-cell">{eight}</div>
-                <div className="possibility-cell">{nine}</div>
+                <div className={"possibility-cell " + seven}>7</div>
+                <div className={"possibility-cell " + eight}>8</div>
+                <div className={"possibility-cell " + nine} >9</div>
                 </div>
         </div>
     );

@@ -107,6 +107,9 @@ ul {
     line-height: 9px;
 }
 
+.blank {
+    visibility: hidden;
+}
 .number:focus {
     outline: none;
 }
