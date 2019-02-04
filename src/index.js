@@ -124,7 +124,7 @@ class gameBoard {
     
 }
 
-function PossibilityGrid(props) {
+function NotesGrid(props) {
     const one = props.square.notes.includes(1) ? '' : 'blank';
     const two = props.square.notes.includes(2) ? '' : 'blank';
     const three = props.square.notes.includes(3) ? '' : 'blank';
@@ -135,21 +135,21 @@ function PossibilityGrid(props) {
     const eight = props.square.notes.includes(8) ? '' : 'blank';
     const nine = props.square.notes.includes(9) ? '' : 'blank';
     return (
-        <div className="possibilities">
-            <div className="possibility-row">
-                <div className={"possibility-cell " + one}>1</div>
-                <div className={"possibility-cell " + two}>2</div>
-                <div className={"possibility-cell " + three}>3</div>
+        <div className="notes">
+            <div className="notes-row">
+                <div className={"note-cell " + one}>1</div>
+                <div className={"note-cell " + two}>2</div>
+                <div className={"note-cell " + three}>3</div>
             </div>
-            <div className="possibility-row">
-                <div className={"possibility-cell " + four}>4</div>
-                <div className={"possibility-cell " + five}>5</div>
-                <div className={"possibility-cell " + six}>6</div>
+            <div className="notes-row">
+                <div className={"note-cell " + four}>4</div>
+                <div className={"note-cell " + five}>5</div>
+                <div className={"note-cell " + six}>6</div>
             </div>
-            <div className="possibility-row">
-                <div className={"possibility-cell " + seven}>7</div>
-                <div className={"possibility-cell " + eight}>8</div>
-                <div className={"possibility-cell " + nine} >9</div>
+            <div className="notes-row">
+                <div className={"note-cell " + seven}>7</div>
+                <div className={"note-cell " + eight}>8</div>
+                <div className={"note-cell " + nine} >9</div>
                 </div>
         </div>
     );
@@ -184,7 +184,7 @@ function Square(props) {
         // This square has a value, display that
         content = props.square.displayValue
     } else {
-        content = new PossibilityGrid(props);
+        content = new NotesGrid(props);
     }
     return (
         <button

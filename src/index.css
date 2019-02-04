@@ -95,17 +95,17 @@ ul {
     color: grey;
 }
 
-.possibilities {
+.notes {
     color: grey;
     font-size: 10px;
     display: table;
 }
 
-.possibility-row::after {
+.notes-row::after {
     display: table;
 }
 
-.possibility-cell {
+.note-cell {
     float: left;
     padding: 1px;
     line-height: 9px;
