@@ -275,17 +275,16 @@ class Game extends React.Component {
     }
 
     changeSquare(value) {
-        const history = this.state.history.slice(0, this.state.historyPointer + 1);
         const board = this.currentBoard().clone();
-        const selection = this.state.selection;
-        const square = board.square(selection.x, selection.y);
+        const square = board.square(this.state.selection.x, this.state.selection.y);
         if (!square.starting) {
+            const history = this.state.history.slice(0, this.state.historyPointer + 1);
             square.displayValue = value;
+            this.setState({
+                history: history.concat([board]),
+                historyPointer: history.length
+            });
         }
-        this.setState({
-            history: history.concat([board]),
-            historyPointer: history.length
-        });
     }
 
     numberGuessed(i) {
