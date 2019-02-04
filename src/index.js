@@ -4,8 +4,8 @@ import ReactDOM from 'react-dom';
 import './index.css';
 
 class gameSquare {
-    constructor(board, x, y) {
-        this.board = board;
+    constructor(numberGuessedCallback, x, y) {
+        this.numberGuessedCallback = numberGuessedCallback;
         this.displayValue = null;
         this.trueValue = null;
         this.starting = null;
@@ -33,6 +33,11 @@ class gameSquare {
             this.notes.push(i);
         }
     }
+
+    numberGuessed(i) {
+        this.displayValue = i;
+        this.numberGuessedCallback(this.x, this.y, i);
+    }
 }
 
 class gameBoard {
@@ -40,9 +45,13 @@ class gameBoard {
         this.array = [];
         for (let i = 0; i < 9; i++) {
             for (let j = 0; j < 9; j++) {
-                this.array.push(new gameSquare(this, i, j));
+                this.array.push(new gameSquare((x, y, i) => {this.numberGuessed(x, y, i);}, i, j));
             }
         }
+    }
+
+    numberGuessed(x, y, i) {
+
     }
 
     clone() {
@@ -272,7 +281,6 @@ class Tools extends React.Component {
 class Game extends React.Component {
     constructor(props) {
         super(props);
-        this.numberGuessedCallback = null;
         this.state = {
             history: [new gameBoard()],
             historyPointer: 0,
@@ -301,7 +309,7 @@ class Game extends React.Component {
 
     numberGuessed(i) {
         if (!this.state.pencil) {
-            this.changeSquare((square) => {square.displayValue = i;});
+            this.changeSquare((square) => {square.numberGuessed(i);});
         } else {
             this.changeSquare((square) => {square.note(i);});
         }
