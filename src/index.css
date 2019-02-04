@@ -91,6 +91,11 @@ ul {
     width: 34px;
 }
 
+.possibilities {
+    color: grey;
+    font-size: 12px;
+}
+
 .number:focus {
     outline: none;
 }

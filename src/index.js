@@ -113,9 +113,32 @@ class gameBoard {
 }
 
 function PossibilityGrid(props) {
+    const one = props.square.possibilities.includes(1) ? '1' : ' ';
+    const two = props.square.possibilities.includes(2) ? '2' : ' ';
+    const three = props.square.possibilities.includes(3) ? '3' : ' ';
+    const four = props.square.possibilities.includes(4) ? '4' : ' ';
+    const five = props.square.possibilities.includes(5) ? '5' : ' ';
+    const six = props.square.possibilities.includes(6) ? '6' : ' ';
+    const seven = props.square.possibilities.includes(7) ? '7' : ' ';
+    const eight = props.square.possibilities.includes(8) ? '8' : ' ';
+    const nine = props.square.possibilities.includes(9) ? '9' : ' ';
     return (
         <div className="possibilities">
-            {props.square.possibilities}
+            <div className="possibility-row">
+                <div>{one}</div>
+                <div>{two}</div>
+                <div>{three}</div>
+            </div>
+            <div className="possibility-row">
+                <div>{four}</div>
+                <div>{five}</div>
+                <div>{six}</div>
+            </div>
+            <div className="possibility-row">
+                <div>{seven}</div>
+                <div>{eight}</div>
+                <div>{nine}</div>
+            </div>
         </div>
     );
 }
