@@ -9,7 +9,7 @@ class gameSquare {
         this.displayValue = null;
         this.trueValue = null;
         this.starting = null;
-        this.possibilities = [];
+        this.notes = [];
         this.x = x;
         this.y = y;
     }
@@ -17,20 +17,20 @@ class gameSquare {
     copyValuesFrom(other) {
         this.displayValue = other.displayValue;
         this.trueValue = other.trueValue;
-        this.possibilities = other.possibilities.slice();
+        this.notes = other.notes.slice();
         this.starting = other.starting;
     }
 
     clear() {
         this.displayValue = null;
-        this.possibilities = [];
+        this.notes = [];
     }
 
-    possibility(i) {
-        if (i in this.possibilities) {
-            this.possibilities.splice(this.possibilities.indexOf(i), 1);
+    note(i) {
+        if (i in this.notes) {
+            this.notes.splice(this.notes.indexOf(i), 1);
         } else {
-            this.possibilities.push(i);
+            this.notes.push(i);
         }
     }
 }
@@ -113,7 +113,7 @@ class gameBoard {
             9, 2, 8, null, null, null, null, 6, null, 
         ]
         this.setSudoku(trueValues, displayValues);
-        this.array[0].possibilities = [1, 3, 5, 7, 9];
+        this.array[0].notes = [1, 3, 5, 7, 9];
     }
 
     square(x, y) {
@@ -125,15 +125,15 @@ class gameBoard {
 }
 
 function PossibilityGrid(props) {
-    const one = props.square.possibilities.includes(1) ? '' : 'blank';
-    const two = props.square.possibilities.includes(2) ? '' : 'blank';
-    const three = props.square.possibilities.includes(3) ? '' : 'blank';
-    const four = props.square.possibilities.includes(4) ? '' : 'blank';
-    const five = props.square.possibilities.includes(5) ? '' : 'blank';
-    const six = props.square.possibilities.includes(6) ? '' : 'blank';
-    const seven = props.square.possibilities.includes(7) ? '' : 'blank';
-    const eight = props.square.possibilities.includes(8) ? '' : 'blank';
-    const nine = props.square.possibilities.includes(9) ? '' : 'blank';
+    const one = props.square.notes.includes(1) ? '' : 'blank';
+    const two = props.square.notes.includes(2) ? '' : 'blank';
+    const three = props.square.notes.includes(3) ? '' : 'blank';
+    const four = props.square.notes.includes(4) ? '' : 'blank';
+    const five = props.square.notes.includes(5) ? '' : 'blank';
+    const six = props.square.notes.includes(6) ? '' : 'blank';
+    const seven = props.square.notes.includes(7) ? '' : 'blank';
+    const eight = props.square.notes.includes(8) ? '' : 'blank';
+    const nine = props.square.notes.includes(9) ? '' : 'blank';
     return (
         <div className="possibilities">
             <div className="possibility-row">
@@ -304,7 +304,7 @@ class Game extends React.Component {
         if (!this.state.pencil) {
             this.changeSquare((square) => {square.displayValue = i;});
         } else {
-            this.changeSquare((square) => {square.possibility(i);});
+            this.changeSquare((square) => {square.note(i);});
         }
     }
 
