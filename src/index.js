@@ -306,6 +306,12 @@ class Game extends React.Component {
             this.arrowDown(event.key);
         } else if (['Backspace', 'Delete'].includes(event.key)) {
             this.clearClicked();
+        } else if (event.ctrlKey) {
+            if (event.key === 'z') {
+                this.undoClicked();
+            } else if (event.key === 'y') {
+                this.redoClicked();
+            }
         }
     }
 
