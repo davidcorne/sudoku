@@ -235,7 +235,6 @@ class Game extends React.Component {
 
     changeSquare(value) {
         const history = this.state.history.slice(0, this.state.historyPointer + 1);
-        console.log(history);
         const board = this.currentBoard().clone();
         const selection = this.state.selection;
         const square = board.square(selection.x, selection.y);
