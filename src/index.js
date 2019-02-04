@@ -100,8 +100,7 @@ class gameBoard {
             9, 2, 8, null, null, null, null, 6, null, 
         ]
         this.setSudoku(trueValues, displayValues);
-        this.array[0].possibilities.push(8);
-        this.array[0].possibilities.push(5);
+        this.array[0].possibilities = [1, 2, 3, 4, 5, 6, 7, 8, 9];
     }
 
     square(x, y) {
@@ -125,20 +124,20 @@ function PossibilityGrid(props) {
     return (
         <div className="possibilities">
             <div className="possibility-row">
-                <div>{one}</div>
-                <div>{two}</div>
-                <div>{three}</div>
+                <div className="possibility-cell">{one}</div>
+                <div className="possibility-cell">{two}</div>
+                <div className="possibility-cell">{three}</div>
             </div>
             <div className="possibility-row">
-                <div>{four}</div>
-                <div>{five}</div>
-                <div>{six}</div>
+                <div className="possibility-cell">{four}</div>
+                <div className="possibility-cell">{five}</div>
+                <div className="possibility-cell">{six}</div>
             </div>
             <div className="possibility-row">
-                <div>{seven}</div>
-                <div>{eight}</div>
-                <div>{nine}</div>
-            </div>
+                <div className="possibility-cell">{seven}</div>
+                <div className="possibility-cell">{eight}</div>
+                <div className="possibility-cell">{nine}</div>
+                </div>
         </div>
     );
 }

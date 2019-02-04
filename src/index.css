@@ -93,7 +93,18 @@ ul {
 
 .possibilities {
     color: grey;
-    font-size: 12px;
+    font-size: 10px;
+    display: table;
+}
+
+.possibility-row::after {
+    display: table;
+}
+
+.possibility-cell {
+    float: left;
+    padding: 1px;
+    line-height: 9px;
 }
 
 .number:focus {
