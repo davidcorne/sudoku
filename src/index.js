@@ -200,8 +200,11 @@ class Tools extends React.Component {
     render() {
         return (
             <div className="tools">
-                <button onClick={() => this.props.undoClicked()}>
+                <button onClick={() => this.props.undoClicked()} disabled={this.props.undoDisabled}>
                     Undo
+                </button>
+                <button onClick={() => this.props.redoClicked()} disabled={this.props.redoDisabled}>
+                    Redo
                 </button>
                 <button onClick={() => this.props.editModeClicked()}>
                     Edit Mode
@@ -219,6 +222,7 @@ class Game extends React.Component {
         this.numberGuessedCallback = null;
         this.state = {
             history: [new gameBoard()],
+            historyPointer: 0,
             selection: {x:0, y:0},
             pencil: false
         }
@@ -226,11 +230,12 @@ class Game extends React.Component {
     }
 
     currentBoard() {
-        return this.state.history[this.state.history.length - 1];
+        return this.state.history[this.state.historyPointer];
     }
 
     changeSquare(value) {
-        const history = this.state.history;
+        const history = this.state.history.slice(0, this.state.historyPointer + 1);
+        console.log(history);
         const board = this.currentBoard().clone();
         const selection = this.state.selection;
         const square = board.square(selection.x, selection.y);
@@ -238,7 +243,8 @@ class Game extends React.Component {
             square.displayValue = value;
         }
         this.setState({
-            history: history.concat([board])
+            history: history.concat([board]),
+            historyPointer: history.length
         });
     }
 
@@ -279,15 +285,23 @@ class Game extends React.Component {
     }
 
     undoClicked() {
-        if (this.state.history.length > 1) {
+        if (this.state.historyPointer > 0) {
             this.setState({
-                history: this.state.history.slice(0, this.state.history.length - 1)
+                historyPointer: this.state.historyPointer - 1
+            })
+        }
+    }
+
+    redoClicked() {
+        if (this.state.historyPointer < this.state.history.length - 1) {
+            this.setState({
+                historyPointer: this.state.historyPointer + 1
             })
         }
     }
 
     handleKeyDown(event) {
-        if (['1', '2', '3', '4', '5', '6', '7', '8', '9', '0'].includes(event.key)) {
+        if (['1', '2', '3', '4', '5', '6', '7', '8', '9'].includes(event.key)) {
             this.numberGuessed(parseInt(event.key));
         } else if (event.key.startsWith('Arrow')) {
             this.arrowDown(event.key);
@@ -315,6 +329,9 @@ class Game extends React.Component {
           </div>
           <Tools 
             undoClicked={()=>this.undoClicked()}
+            undoDisabled={this.state.historyPointer === 0}
+            redoClicked={()=>this.redoClicked()}
+            redoDisabled={this.state.historyPointer === this.state.history.length - 1}
             editModeClicked={()=>this.editModeClicked()}
             clearClicked={() => this.clearClicked()}
           />
