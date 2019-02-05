@@ -196,15 +196,21 @@ class Menu extends React.Component {
 class Game extends React.Component {
     constructor(props) {
         super(props);
-        this.state = {
-            history: [new gameBoard()],
+        this.state = this.newState('test');
+    }
+
+    newState(difficulty) {
+        const board = new gameBoard();
+        board.generate(difficulty);
+        const state = {
+            history: [board],
             historyPointer: 0,
             selection: {x:0, y:0},
             pencil: false
         }
-        this.state.history[0].generate();
+        return state;
     }
-
+    
     currentBoard() {
         return this.state.history[this.state.historyPointer];
     }
@@ -220,6 +226,10 @@ class Game extends React.Component {
                 historyPointer: history.length
             });
         }
+    }
+
+    newGame(difficulty) {
+        this.setState(this.newState(difficulty));
     }
 
     numberGuessed(i) {
