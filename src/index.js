@@ -150,6 +150,49 @@ class Tools extends React.Component {
         )
     }
 }
+
+class Menu extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            show: false
+        };
+
+        this.showMenu = this.showMenu.bind(this);
+        this.closeMenu = this.closeMenu.bind(this);
+    }
+
+    showMenu(event) {
+        this.setState({show: true}, () => {
+            document.addEventListener('click', this.closeMenu);
+        });
+    }
+
+    closeMenu(event) {
+        this.setState({show: false}, () => {
+            document.removeEventListener('click', this.closeMenu);
+        });
+    }
+
+    render() {
+        return (
+            <div>
+                <button onClick={() => this.showMenu()}>New</button>
+                {this.state.show ?
+                    (<div className="menu">
+                        <button>Easy</button>
+                        <button>Medium</button>
+                        <button>Difficult</button>
+                        <button>Insane</button>
+                        <button>Test</button>
+                    </div>
+                    ) : null
+                }
+            </div>
+        );
+    }
+}
+
 class Game extends React.Component {
     constructor(props) {
         super(props);
@@ -264,6 +307,7 @@ class Game extends React.Component {
     render() {
       return (
         <div className="game" onKeyDown={(event) => this.handleKeyDown(event)}>
+          <Menu />
           <div className="game-board">
             <Board 
                 selection={this.state.selection} 
