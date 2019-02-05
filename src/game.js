@@ -1,3 +1,68 @@
+function gameGenerator(board, difficulty) {
+    if (difficulty === 'test') {
+        testGenerator(board);
+    } else {
+        const difficultyNumber = {
+            'easy': 61,
+            'medium': 52,
+            'difficult': 39,
+            'insane': 25
+        }[difficulty];
+        // just use a test one for now.
+        testGenerator(board);
+    }
+}
+
+function testGenerator(board) {
+    // Should generate a sudoku, hard-code one for now.
+    // 8 4 5 | 6 3 2 | 1 7 9 
+    // 7 3 2 | 9 1 8 | 6 5 4 
+    // 1 9 6 | 7 4 5 | 3 2 8 
+    // ---------------------
+    // 6 8 3 | 5 7 4 | 9 1 2
+    // 4 5 7 | 2 9 1 | 8 3 6
+    // 2 1 9 | 8 6 3 | 5 4 7
+    // ---------------------
+    // 3 6 1 | 4 2 9 | 7 8 5
+    // 5 7 4 | 1 8 6 | 2 9 3
+    // 9 2 8 | 3 5 7 | 4 6 1
+    const trueValues = [
+        8, 4, 5, 6, 3, 2, 1, 7, 9,
+        7, 3, 2, 9, 1, 8, 6, 5, 4, 
+        1, 9, 6, 7, 4, 5, 3, 2, 8, 
+        6, 8, 3, 5, 7, 4, 9, 1, 2,
+        4, 5, 7, 2, 9, 1, 8, 3, 6,
+        2, 1, 9, 8, 6, 3, 5, 4, 7,
+        3, 6, 1, 4, 2, 9, 7, 8, 5,
+        5, 7, 4, 1, 8, 6, 2, 9, 3,
+        9, 2, 8, 3, 5, 7, 4, 6, 1,
+    ]
+    // 0 4 0 | 0 0 0 | 1 7 9 
+    // 0 0 2 | 0 0 8 | 0 5 4 
+    // 0 0 6 | 0 0 5 | 0 0 8 
+    // ---------------------
+    // 0 8 0 | 0 7 0 | 9 1 0 
+    // 0 5 0 | 0 9 0 | 0 3 0 
+    // 0 1 9 | 0 6 0 | 0 4 0 
+    // ---------------------
+    // 3 0 0 | 4 0 0 | 7 0 0 
+    // 5 7 0 | 1 0 0 | 2 0 0 
+    // 9 2 8 | 0 0 0 | 0 6 0 
+
+    const displayValues = [
+        null, 4, null, null, null, null, 1, 7, 9, 
+        null, null, 2, null, null, 8, null, 5, 4, 
+        null, null, 6, null, null, 5, null, null, 8, 
+        null, 8, null, null, 7, null, 9, 1, null, 
+        null, 5, null, null, 9, null, null, 3, null, 
+        null, 1, 9, null, 6, null, null, 4, null, 
+        3, null, null, 4, null, null, 7, null, null, 
+        5, 7, null, 1, null, null, 2, null, null, 
+        9, 2, 8, null, null, null, null, 6, null, 
+    ]
+    board.setSudoku(trueValues, displayValues);
+}
+
 class gameSquare {
     constructor(numberGuessedCallback, x, y) {
         this.numberGuessedCallback = numberGuessedCallback;
@@ -96,54 +161,8 @@ export class gameBoard {
         }
 
     }
-    generate() {
-        // Should generate a sudoku, hard-code one for now.
-        // 8 4 5 | 6 3 2 | 1 7 9 
-        // 7 3 2 | 9 1 8 | 6 5 4 
-        // 1 9 6 | 7 4 5 | 3 2 8 
-        // ---------------------
-        // 6 8 3 | 5 7 4 | 9 1 2
-        // 4 5 7 | 2 9 1 | 8 3 6
-        // 2 1 9 | 8 6 3 | 5 4 7
-        // ---------------------
-        // 3 6 1 | 4 2 9 | 7 8 5
-        // 5 7 4 | 1 8 6 | 2 9 3
-        // 9 2 8 | 3 5 7 | 4 6 1
-        const trueValues = [
-            8, 4, 5, 6, 3, 2, 1, 7, 9,
-            7, 3, 2, 9, 1, 8, 6, 5, 4, 
-            1, 9, 6, 7, 4, 5, 3, 2, 8, 
-            6, 8, 3, 5, 7, 4, 9, 1, 2,
-            4, 5, 7, 2, 9, 1, 8, 3, 6,
-            2, 1, 9, 8, 6, 3, 5, 4, 7,
-            3, 6, 1, 4, 2, 9, 7, 8, 5,
-            5, 7, 4, 1, 8, 6, 2, 9, 3,
-            9, 2, 8, 3, 5, 7, 4, 6, 1,
-        ]
-        // 0 4 0 | 0 0 0 | 1 7 9 
-        // 0 0 2 | 0 0 8 | 0 5 4 
-        // 0 0 6 | 0 0 5 | 0 0 8 
-        // ---------------------
-        // 0 8 0 | 0 7 0 | 9 1 0 
-        // 0 5 0 | 0 9 0 | 0 3 0 
-        // 0 1 9 | 0 6 0 | 0 4 0 
-        // ---------------------
-        // 3 0 0 | 4 0 0 | 7 0 0 
-        // 5 7 0 | 1 0 0 | 2 0 0 
-        // 9 2 8 | 0 0 0 | 0 6 0 
-
-        const displayValues = [
-            null, 4, null, null, null, null, 1, 7, 9, 
-            null, null, 2, null, null, 8, null, 5, 4, 
-            null, null, 6, null, null, 5, null, null, 8, 
-            null, 8, null, null, 7, null, 9, 1, null, 
-            null, 5, null, null, 9, null, null, 3, null, 
-            null, 1, 9, null, 6, null, null, 4, null, 
-            3, null, null, 4, null, null, 7, null, null, 
-            5, 7, null, 1, null, null, 2, null, null, 
-            9, 2, 8, null, null, null, null, 6, null, 
-        ]
-        this.setSudoku(trueValues, displayValues);
+    generate(difficulty) {
+        gameGenerator(this, difficulty);
     }
 
     square(x, y) {
