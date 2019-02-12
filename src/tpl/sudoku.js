@@ -1,3 +1,4 @@
+/* eslint-disable */
 // This is from https://github.com/robatron/sudoku.js/ licensed under the MIT licence,
 // from master at commit 3ea8585b8355e2824adcec4fcf308691ef54fd19
 
