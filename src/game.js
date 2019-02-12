@@ -1,3 +1,5 @@
+import { sudoku } from './tpl/sudoku.js';
+
 function gameGeneratorFromDifficulty(board, difficulty) {
     if (difficulty === 'test') {
         testGenerator(board);
@@ -9,8 +11,13 @@ function gameGeneratorFromDifficulty(board, difficulty) {
             'insane': 25
         }[difficulty];
         // just use a test one for now.
-        testGenerator(board);
+        const stringFormatBoard = sudoku.generate(difficultyNumber);
+        console.log(stringFormatBoard);
     }
+}
+
+function stringFormatToBoard(stringFormatBoard, board) {
+
 }
 
 function testGenerator(board) {
