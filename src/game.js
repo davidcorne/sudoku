@@ -1,4 +1,4 @@
-function gameGenerator(board, difficulty) {
+function gameGeneratorFromDifficulty(board, difficulty) {
     if (difficulty === 'test') {
         testGenerator(board);
     } else {
@@ -162,7 +162,7 @@ export class gameBoard {
 
     }
     generate(difficulty) {
-        gameGenerator(this, difficulty);
+        gameGeneratorFromDifficulty(this, difficulty);
     }
 
     square(x, y) {
