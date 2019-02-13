@@ -12,12 +12,30 @@ function gameGeneratorFromDifficulty(board, difficulty) {
         }[difficulty];
         // just use a test one for now.
         const stringFormatBoard = sudoku.generate(difficultyNumber);
-        console.log(stringFormatBoard);
+        stringFormatToBoard(stringFormatBoard, board);
     }
 }
 
-function stringFormatToBoard(stringFormatBoard, board) {
+function stringFormatToArray(string) {
+    if (string.length !== 81) {
+        throw Error('Invalid string input.')
+    }
+    const convert = (item) => {
+        return item === '.' ? null : item;
+    }
+    const array = string.split('').map(convert);
+    if (array.length !== 81) {
+        throw Error('Poorly formed array output, not length 81.')
+    }
+    return array;
+}
 
+function stringFormatToBoard(stringFormatBoard, board) {
+    const solution = sudoku.solve(stringFormatBoard);
+    if (!solution) {
+        throw Error('Sudoku was unsolvable')
+    }
+    board.setSudoku(stringFormatToArray(solution), stringFormatToArray(stringFormatBoard));
 }
 
 function testGenerator(board) {
