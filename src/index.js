@@ -177,14 +177,14 @@ class Menu extends React.Component {
     render() {
         return (
             <div>
-                <button onClick={() => this.showMenu()}>New</button>
+                <button className="menu-button" onClick={() => this.showMenu()}>New</button>
                 {this.state.show ?
                     (<div className="menu">
-                        <button onClick={() => this.props.newGame('easy')}>Easy</button>
-                        <button onClick={() => this.props.newGame('medium')}>Medium</button>
-                        <button onClick={() => this.props.newGame('difficult')}>Difficult</button>
-                        <button onClick={() => this.props.newGame('insane')}>Insane</button>
-                        <button onClick={() => this.props.newGame('test')}>Test</button>
+                        <button className="menu-button" onClick={() => this.props.newGame('easy')}>Easy</button>
+                        <button className="menu-button" onClick={() => this.props.newGame('medium')}>Medium</button>
+                        <button className="menu-button" onClick={() => this.props.newGame('difficult')}>Difficult</button>
+                        <button className="menu-button" onClick={() => this.props.newGame('insane')}>Insane</button>
+                        <button className="menu-button" onClick={() => this.props.newGame('test')}>Test</button>
                     </div>
                     ) : null
                 }

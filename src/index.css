@@ -126,3 +126,8 @@ ul {
     /*display: flex;*/
     flex-direction: row;
 }
+
+.menu-button {
+    display: block;
+    width: 60px;
+}
