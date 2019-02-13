@@ -179,6 +179,23 @@ export class gameBoard {
         });
     }
 
+    usedNumbers() {
+        const numbers = {1: 0, 2: 0, 3: 0, 4: 0, 5: 0, 6: 0, 7: 0, 8: 0, 9:0};
+        this.array.forEach((square) => {
+            const displayValue = square.displayValue;
+            if (displayValue) {
+                numbers[displayValue] += 1;
+            }
+        })
+        const used = [];
+        for (let i = 1; i < 10; i++) {
+            if (numbers[i] >= 9) {
+                used.push(i);
+            }
+        }
+        return used;
+    }
+
     clone() {
         const newBoard = new gameBoard();
         for (let i = 0; i < 81; i++) {

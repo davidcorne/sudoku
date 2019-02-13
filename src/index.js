@@ -215,8 +215,7 @@ class Game extends React.Component {
             history: [board],
             historyPointer: 0,
             selection: {x:0, y:0},
-            pencil: false,
-            usedNumbers: []
+            pencil: false
         }
         return state;
     }
@@ -233,7 +232,7 @@ class Game extends React.Component {
             mutator(square);
             this.setState({
                 history: history.concat([board]),
-                historyPointer: history.length
+                historyPointer: history.length,
             });
         }
     }
@@ -346,7 +345,7 @@ class Game extends React.Component {
           <Numbers
             onClick={(i)=>{this.numberGuessed(i);}}
             pencil={this.state.pencil}
-            usedNumbers={this.state.usedNumbers}
+            usedNumbers={this.currentBoard().usedNumbers()}
           />
         </div>
       );
