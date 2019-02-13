@@ -28,7 +28,11 @@ function stringFormatToArray(string) {
         throw Error('Invalid string input.')
     }
     const convert = (item) => {
-        return item === '.' ? null : item;
+        if (item === '.') {
+            return null;
+        }
+        const number = parseInt(item);
+        return number;
     }
     const array = string.split('').map(convert);
     if (array.length !== 81) {
@@ -42,7 +46,9 @@ function stringFormatToBoard(stringFormatBoard, board) {
     if (!solution) {
         throw Error('Sudoku was unsolvable')
     }
-    board.setSudoku(stringFormatToArray(solution), stringFormatToArray(stringFormatBoard));
+    const solutionArray = stringFormatToArray(solution);
+    const displayArray = stringFormatToArray(stringFormatBoard);
+    board.setSudoku(solutionArray, displayArray);
 }
 
 function testGenerator(board) {
