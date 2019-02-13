@@ -186,6 +186,7 @@ export class gameBoard {
         }
         return newBoard;
     }
+    
     setSudoku(trueValues, displayValues) {
         if (trueValues.length !== 81) throw Error('Wrong trueValues array length');
         if (displayValues.length !== 81) throw Error('Wrong displayValues array length');
@@ -199,6 +200,7 @@ export class gameBoard {
         }
 
     }
+
     generate(difficulty) {
         gameGeneratorFromDifficulty(this, difficulty);
     }
