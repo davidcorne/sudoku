@@ -12,8 +12,12 @@
 */
 
 (function(root){
-    var sudoku = root.sudoku = {};  // Global reference to the sudoku library
-
+    var sudoku;                    // Global reference to the sudoku library
+    if (root) {
+        sudoku = root.sudoku = {};
+    } else {
+        sudoku = {};
+    }
     sudoku.DIGITS = "123456789";    // Allowed sudoku.DIGITS
     var ROWS = "ABCDEFGHI";         // Row lables
     var COLS = sudoku.DIGITS;       // Column lables
