@@ -1,15 +1,22 @@
 import { sudoku } from './tpl/sudoku.js';
 
+function randomRange(min, max) {
+    return Math.floor(Math.random() * (max - min) + min);
+}
+
 function gameGeneratorFromDifficulty(board, difficulty) {
     if (difficulty === 'test') {
         testGenerator(board);
     } else {
-        const difficultyNumber = {
-            'easy': 61,
-            'medium': 52,
-            'difficult': 39,
-            'insane': 25
+        const difficultyRange = {
+            'easy': [51, 61],
+            'medium': [40, 50],
+            'difficult': [26, 39],
+            'insane': [17, 25]
         }[difficulty];
+        const min = difficultyRange[0];
+        const max = difficultyRange[1];
+        const difficultyNumber = randomRange(min, max);
         // just use a test one for now.
         const stringFormatBoard = sudoku.generate(difficultyNumber);
         stringFormatToBoard(stringFormatBoard, board);
