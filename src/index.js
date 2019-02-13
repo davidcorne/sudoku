@@ -46,17 +46,16 @@ function Square(props) {
     if (props.square.starting) {
         classNames += " starting";
     }
-    //??? These seem to have x/y swapped from what I think. But everything else seems to be fine...
-    if (props.square.y % 3 === 2) {
+    if (props.square.x % 3 === 2) {
         classNames += " column-end"
     }
-    if (props.square.x % 3 === 2) {
+    if (props.square.y % 3 === 2) {
         classNames += " row-end"
     }
-    if (props.square.y === 0) {
+    if (props.square.x === 0) {
         classNames += " column-start"
     }
-    if (props.square.x === 0) {
+    if (props.square.y === 0) {
         classNames += " row-start"
     }
     let content = null;

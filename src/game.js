@@ -150,7 +150,7 @@ export class gameBoard {
         this.array = [];
         for (let i = 0; i < 9; i++) {
             for (let j = 0; j < 9; j++) {
-                this.array.push(new gameSquare((x, y, i) => {this.numberGuessed(x, y, i);}, i, j));
+                this.array.push(new gameSquare((x, y, i) => {this.numberGuessed(x, y, i);}, j, i));
             }
         }
     }
@@ -186,7 +186,7 @@ export class gameBoard {
         }
         return newBoard;
     }
-    
+
     setSudoku(trueValues, displayValues) {
         if (trueValues.length !== 81) throw Error('Wrong trueValues array length');
         if (displayValues.length !== 81) throw Error('Wrong displayValues array length');
@@ -208,7 +208,9 @@ export class gameBoard {
     square(x, y) {
         if (0 > x || x > 8) throw Error('Wrong x coordinate: ' + x);
         if (0 > y || y > 8) throw Error('Wrong y coordinate: ' + y);
-        return this.array[y * 9 + x];
+        const square = this.array[y * 9 + x];
+        if (square.x !== x || square.y !== y) throw Error('Wrong square');
+        return square;
     }
     
 }
