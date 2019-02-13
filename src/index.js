@@ -104,7 +104,9 @@ class Board extends React.Component {
   }
   
 function Number(props) {
-    const className = "number" + (props.pencil ? " pencil" : "");
+    const className = "number" + 
+        (props.pencil ? " pencil" : "") +
+        (props.blank ? " blank" : "");
     return (
         <button
             className={className}
@@ -118,7 +120,15 @@ function Number(props) {
 function Numbers(props) {
     const numbers = [];
     function renderNumber(i) {
-        return (<Number value={i} key={i} onClick={()=>{props.onClick(i);}} pencil={props.pencil}/>);
+        return (
+          <Number 
+            value={i} 
+            key={i} 
+            onClick={()=>{props.onClick(i);}}
+            pencil={props.pencil}
+            blank={props.usedNumbers.includes(i)}
+          />
+        );
     }
     for (let i = 1; i < 10; i++) {
         numbers.push(renderNumber(i));
@@ -205,7 +215,8 @@ class Game extends React.Component {
             history: [board],
             historyPointer: 0,
             selection: {x:0, y:0},
-            pencil: false
+            pencil: false,
+            usedNumbers: []
         }
         return state;
     }
@@ -332,7 +343,11 @@ class Game extends React.Component {
             editModeClicked={()=>this.editModeClicked()}
             clearClicked={() => this.clearClicked()}
           />
-          <Numbers onClick={(i)=>{this.numberGuessed(i);}} pencil={this.state.pencil}/>
+          <Numbers
+            onClick={(i)=>{this.numberGuessed(i);}}
+            pencil={this.state.pencil}
+            usedNumbers={this.state.usedNumbers}
+          />
         </div>
       );
     }
