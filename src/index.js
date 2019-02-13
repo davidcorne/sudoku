@@ -334,9 +334,6 @@ class Game extends React.Component {
             clearClicked={() => this.clearClicked()}
           />
           <Numbers onClick={(i)=>{this.numberGuessed(i);}} pencil={this.state.pencil}/>
-          <div className="game-info">
-            <ol>{/* TODO */}</ol>
-          </div>
         </div>
       );
     }
